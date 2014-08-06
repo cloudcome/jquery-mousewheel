@@ -163,6 +163,19 @@ module.exports = function($){
         },
 
 
+
+        /**
+         * 是否阻止默认事件
+         * @param  {Boolean} isPreventDefault 是否，布尔值
+         * @return undefined
+         * @version 1.0
+         * 2014年7月3日18:00:50
+         */
+        preventDefault: function(isPreventDefault) {
+            this.options.isPreventDefault = !! isPreventDefault;
+        },
+
+
         /**
          * 设置或获取选项
          * @param  {String/Object} key 键或键值对
@@ -180,18 +193,6 @@ module.exports = function($){
             else map[key] = val;
 
             this.options = $.extend(this.options, map);
-        },
-
-
-        /**
-         * 是否阻止默认事件
-         * @param  {Boolean} isPreventDefault 是否，布尔值
-         * @return undefined
-         * @version 1.0
-         * 2014年7月3日18:00:50
-         */
-        preventDefault: function(isPreventDefault) {
-            this.options.isPreventDefault = !! isPreventDefault;
-        },
+        }
     };
 };

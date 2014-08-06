@@ -1,6 +1,6 @@
 {
   "name": "jquery-mousewheel",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "jquery.fn.mousewheel 鼠标滚动事件",
   "keywords": [
     "jquery",
