@@ -88,10 +88,10 @@ module.exports = function($){
 
 
     function Constructor(element, options) {
-        var that = this;
-        that.$element = $(element);
-        that.options = options;
-        that.wheelLength = 0;
+        var the = this;
+        the.$element = $(element);
+        the.options = options;
+        the.wheelLength = 0;
     }
 
     Constructor.prototype = {
@@ -102,52 +102,53 @@ module.exports = function($){
          * 2014年7月3日17:58:35
          */
         _init: function() {
-            var that = this,
-                $element = that.$element,
+            var 
+                the = this,
+                $element = the.$element,
                 element = $element[0],
-                options = that.options;
+                options = the.options;
 
-            $element.bind(eventType, function(e) {
-                e = e.originalEvent || e;
-
-                var wheelDeltaY = 0;
+            $element.bind(eventType, function(eve) {
+                var 
+                    wheelDeltaY = 0,
+                    oe = eve.originalEvent;
 
                 // chrome
-                if ('wheelDeltaY' in e) {
-                    wheelDeltaY = e.wheelDeltaY > 0 ? 1 : -1;
+                if ('wheelDeltaY' in oe) {
+                    wheelDeltaY = oe.wheelDeltaY > 0 ? 1 : -1;
                 }
                 // ie9/firefox
-                else if ('deltaY' in e) {
-                    wheelDeltaY = e.deltaY > 0 ? -1 : 1;
+                else if ('deltaY' in oe) {
+                    wheelDeltaY = oe.deltaY > 0 ? -1 : 1;
                 }
                 // ie8/ie7/ie6
-                else if ('wheelDelta' in e) {
-                    wheelDeltaY = e.wheelDelta > 0 ? 1 : -1;
+                else if ('wheelDelta' in oe) {
+                    wheelDeltaY = oe.wheelDelta > 0 ? 1 : -1;
                 }
 
 
                 if (wheelDeltaY) {
-                    that._reset();
+                    the._reset();
 
-                    that.wheelLength += wheelDeltaY;
-                    that.timeid = setTimeout(function() {
-                        options.onmousewheelend.call(element, that.wheelLength);
-                        that.wheelLength = 0;
-                        that.is = !1;
+                    the.wheelLength += wheelDeltaY;
+                    the.timeid = setTimeout(function() {
+                        options.onmousewheelend.call(element, the.wheelLength);
+                        the.wheelLength = 0;
+                        the.is = !1;
                     }, options.timeout);
 
-                    if (!that.is) {
-                        that.is = !0;
+                    if (!the.is) {
+                        the.is = !0;
                         options.onmousewheelstart.call(element);
                     }
 
                     options.onmousewheel.call(element, wheelDeltaY);
                 }
 
-                if (options.isPreventDefault) e.preventDefault();
+                if (options.isPreventDefault) eve.preventDefault();
             });
 
-            return that;
+            return the;
         },
 
         /**
@@ -157,9 +158,9 @@ module.exports = function($){
          * 2014年7月3日17:58:54
          */
         _reset: function() {
-            var that = this;
-            if (that.timeid) clearTimeout(that.timeid);
-            that.timeid = 0;
+            var the = this;
+            if (the.timeid) clearTimeout(the.timeid);
+            the.timeid = 0;
         },
 
 
